@@ -127,8 +127,8 @@ const RULES = [
   },
   {
     registryEvent: 'instance-refreshed',
-    resource: 'InstanceStore',
-    action: 'refreshed',
+    resource: 'Deployment',
+    action: 'detected',
     condition: (state) => (state.instance.databases !== null),
     metadata: (state) => ({
       'databases count': state.instance.databases.length,
