@@ -138,15 +138,6 @@ const SchemaValidationResource = BaseResource.extend({
   }
 });
 
-// ExplainPlan resource uses 'fetched' as an action
-const ExplainPlanResource = BaseResource.extend({
-  id: 'ExplainPlan',
-  eventTrackers: ['stitch'],
-  fetched: function(metadata, callback) {
-    this._send_event(metadata, callback);
-  }
-});
-
 // Explain resource uses 'fetched' as action
 const ExplainResource = BaseResource.extend({
   id: 'Explain',
@@ -297,7 +288,6 @@ featureResources.Query = new QueryResource();
 featureResources.Application = new ApplicationResource();
 featureResources['Validation Rules'] = new ValidationRulesResource();
 featureResources.SchemaValidation = new SchemaValidationResource();
-featureResources.ExplainPlan = new ExplainPlanResource();
 featureResources.Explain = new ExplainResource();
 featureResources.Import = new ImportResource();
 featureResources.Export = new ExportResource();

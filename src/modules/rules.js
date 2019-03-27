@@ -295,7 +295,7 @@ const RULES = [
   },
   {
     registryEvent: 'explain-plan-fetched',
-    resource: 'ExplainPlan',
+    resource: 'Explain',
     action: 'fetched',
     condition: () => true,
     metadata: (data) => ({
