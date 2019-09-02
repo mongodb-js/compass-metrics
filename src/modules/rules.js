@@ -85,7 +85,7 @@ const RULES = [
     action: 'updated',
     condition: () => true,
     metadata: (view, screen) => ({
-      'screen': screen || 'List',
+      'screen': screen,
       'view': view
     })
   },
@@ -95,8 +95,8 @@ const RULES = [
     action: 'inserted',
     condition: () => true,
     metadata: (view, mode, multiple) => ({
-      'mode': mode || 'JSON',
-      'multiple': multiple || false,
+      'mode': mode,
+      'multiple': multiple,
       'view': view
     })
   },
