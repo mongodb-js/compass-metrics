@@ -11,7 +11,7 @@ const metrics = require('mongodb-js-metrics')();
 const debug = require('debug')('mongodb-compass:metrics:setup');
 
 
-// Keys are injected when Compass is built on evergreen 
+// Keys are injected when Compass is built on evergreen.
 const INTERCOM_KEY = process.env.HARDRON_METRICS_INTERCOM_APP_ID;
 const BUGSNAG_KEY = process.env.HARDRON_METRICS_BUGSNAG_KEY;
 const STITCH_APP = process.env.HARDRON_METRICS_STITCH_APP_ID;
