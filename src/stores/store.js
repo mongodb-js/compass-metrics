@@ -20,16 +20,16 @@ const trackStoreUpdate = (appRegistry, storeName, rule, version) => {
     return;
   }
   // attach an event listener
-  store.listen((state) => {
+  store.listen(async(state) => {
     // only track an event if the rule condition evaluates to true
     if (rule.condition(state)) {
       // Some stores trigger with arrays of data.
       if (rule.multi) {
-        state.forEach((s) => {
-          metrics.track(rule.resource, rule.action, rule.metadata(version, s));
-        });
+        for (const singleState of state) {
+          metrics.track(rule.resource, rule.action, await rule.metadata(version, singleState));
+        }
       } else {
-        metrics.track(rule.resource, rule.action, rule.metadata(version, state));
+        metrics.track(rule.resource, rule.action, await rule.metadata(version, state));
       }
     }
   });
@@ -45,10 +45,10 @@ const trackStoreUpdate = (appRegistry, storeName, rule, version) => {
  */
 const trackRegistryEvent = (appRegistry, eventName, rule, version) => {
   // attach an event listener
-  appRegistry.on(eventName, (...args) => {
+  appRegistry.on(eventName, async(...args) => {
     // only track an event if the rule condition evaluates to true
     if (rule.condition(...args)) {
-      metrics.track(rule.resource, rule.action, rule.metadata(version, ...args));
+      metrics.track(rule.resource, rule.action, await rule.metadata(version, ...args));
     }
   });
 };
