@@ -301,10 +301,18 @@ const RULES = [
     resource: 'Import',
     action: 'completed',
     condition: () => true,
-    metadata: (version, size, fileType) => ({
+    metadata: (version, size, fileType, howManyDocsImported, fileIsMultilineJSON, delimiter, ignoreBlanks,
+      stopOnErrors, anyFieldsExcluded, anyFieldsTransformed) => ({
       'size': size,
       'file type': fileType,
-      compass_version: version
+      compass_version: version,
+      'num docs': howManyDocsImported,
+      'multiline json': fileIsMultilineJSON,
+      delimiter: delimiter,
+      'ignore blanks': ignoreBlanks,
+      'stop on errors': stopOnErrors,
+      'excluded fields': anyFieldsExcluded,
+      'transformed fields': anyFieldsTransformed
     })
   },
   {

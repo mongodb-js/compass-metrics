@@ -1,21 +1,36 @@
-# metrics [![][travis_img]][travis_url] [![][npm_img]][npm_url]
+# @mongodb-js/compass-metrics [![][travis_img]][travis_url] [![][npm_img]][npm_url]
 
-> Compass Metrics Plugin
+A [MongoDB Compass](https://github.com/mongodb-js/compass) plugin that allows you to help the team by [submitting error diagnostics and telemetry](https://docs.mongodb.com/compass/master/faq/#how-do-i-view-and-modify-my-privacy-settings). it configures [the mongodb-js-metrics module](https://github.com/mongodb-js/metrics) to handle data transport, along with a manifest of what information could be collected (see [./src/modules/rules.js](src/modules/rules.js)).
+
+The metrics plugin is heavily inspired by [the Atom metrics package](https://atom.io/packages/metrics).
 
 ## Usage
 
-## License
+To open the Import File dialog, a plugin emits `open-import`:
 
-Apache 2
+```
+dispatch(globalAppRegistryEmit('open-import'));
+```
 
-===
+[./src/modules/rules.js](src/modules/rules.js) defines what events in Compass we subscribe to for telemetry and the associated metadata we'll capture. So we can answer our question with this small rule:
 
-## Features
+```
+{
+  // How often is the Import Data window opened?
+  registryEvent: 'open-import',
+  resource: 'Import', // resource in src/modules/features.js
+  action: 'opened',
+  condition: () => true,
+  metadata: (version) => ({
+    compass_version: version
+  })
+}
+```
 
 ## Developing
 
 Almost all of your development will happen in the `./src` directory. Add new components
-to `./src/components`, actions to `./src/actions/index.js` and if you need additional
+to `./src/components`, redux reducers and action creators to `./src/modules` and if you need additional
 stores, add them to `./src/stores`.
 
 To be able to debug the plugin inside `compass` make sure [webpack prod
@@ -26,7 +41,7 @@ If you want faster compiler time when you commit/push, switch it to `false.`
 const config = {
   target: 'electron-renderer',
   devtool: 'source-map'
-}
+};
 ```
 
 #### Directory Structure
@@ -39,11 +54,9 @@ For completeness, below is a list of directories present in this module:
 - `lib` compiled version of your components (plain javascript instead of `jsx`) and
   styles (`css` instead of `less`). Never change anything here as this entire folder
   gets automatically created and overwritten.
-- `src` components, actions and stores source code, as well as style files. This is the
+- `src` components, redux reducers+action creators and stores source code, as well as style files. This is the
   place to implement your own components. `npm run compile` will use `./src` as input
   and create `./lib`.
-- `stories` stories for react-storybook. You can add as many story files as you like,
-  they are automatically added to storybook.
 - `test` implement your tests here, and name the files `*.test.js`.
 
 ## License
