@@ -55,7 +55,7 @@ module.exports = {
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: 'ConnectPlugin_[name]-[local]__[hash:base64:5]'
+              localIdentName: 'MetricsPlugin_[name]-[local]__[hash:base64:5]'
             }
           },
           {
