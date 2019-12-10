@@ -81,6 +81,11 @@ module.exports = {
           }
         }],
         exclude: /(node_modules)/
+      },
+      {
+        type: 'javascript/auto',
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   }

@@ -12,12 +12,27 @@
       ]
     }
   },
-  "presets": [ "react", ["env", { "modules": false }] ],
+  "presets": [
+    [
+      "env", {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ],
   "plugins": [
     "react-hot-loader/babel",
     "syntax-object-rest-spread",
     "transform-object-rest-spread",
     "transform-class-properties",
-    "syntax-dynamic-import"
+    "syntax-dynamic-import",
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
   ]
 }
