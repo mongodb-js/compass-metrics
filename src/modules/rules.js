@@ -443,16 +443,6 @@ const RULES = [
     metadata: (version) => ({
       compass_version: version
     })
-  },
-  {
-    store: 'License.Store',
-    resource: 'License',
-    action: 'viewed',
-    condition: () => true,
-    metadata: (version, state) => ({
-      'license accepted': state.isAgreed,
-      compass_version: version
-    })
   }
 ];
 
