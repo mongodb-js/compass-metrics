@@ -2,9 +2,10 @@ const util = require('util');
 const dns = require('dns');
 const net = require('net');
 
-const request = require('request-promise-native');
+const fetch = require('node-fetch');
 const { Netmask } = require('netmask');
 const gceIps = require('gce-ips');
+
 const azureServiceTagsPublic = require('./ServiceTags_Public_20191202.json');
 
 const dnsLookup = util.promisify(dns.lookup.bind(dns));
@@ -23,7 +24,8 @@ async function getGCPIpRanges() {
 
 async function getAwsIpRanges() {
   const awsIpRangesUrl = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
-  const { prefixes } = await request.get(awsIpRangesUrl, { json: true });
+  const { prefixes } = await fetch(awsIpRangesUrl).then(res => res.json());
+
   return prefixes
     .map((range) => range.ip_prefix)
     .filter(isIpv4Range);
@@ -65,4 +67,3 @@ async function getCloudInfo(host) {
 }
 
 module.exports = getCloudInfo;
-
