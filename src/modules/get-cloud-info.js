@@ -24,7 +24,7 @@ async function getGCPIpRanges() {
 
 async function getAwsIpRanges() {
   const awsIpRangesUrl = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
-  const { prefixes } = await fetch(awsIpRangesUrl).then(res => res.json());
+  const { prefixes } = await fetch(awsIpRangesUrl, { timeout: 3000 }).then(res => res.json());
 
   return prefixes
     .map((range) => range.ip_prefix)
