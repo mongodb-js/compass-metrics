@@ -288,6 +288,9 @@ const ShellResource = BaseResource.extend({
   },
   ['api-call']: function(metadata, callback) {
     this._send_event(metadata, callback);
+  },
+  error: function(metadata, callback) {
+    this._send_event(metadata, callback);
   }
 });
 

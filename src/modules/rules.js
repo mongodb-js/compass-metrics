@@ -483,6 +483,21 @@ const RULES = [
       method: data.method,
       class: data.class
     })
+  },
+  {
+    registryEvent: 'mongosh:error',
+    resource: 'Shell',
+    action: 'error',
+    condition: (error) => {
+      // Only report Mongosh errors (not user / mongo errors).
+      return error && error.name && error.name.includes('Mongosh');
+    },
+    metadata: (version, error) => ({
+      compass_version: version,
+      properties: {
+        error
+      }
+    })
   }
 ];
 
