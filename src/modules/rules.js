@@ -243,12 +243,10 @@ const RULES = [
       isMultiKey: data.isMultiKey,
       isSharded: data.isSharded,
       indexType: data.indexType,
-      index: data.index,
       numberOfDocsReturned: data.numberOfDocsReturned,
       numberOfShards: data.numberOfShards,
       totalDocsExamined: data.totalDocsExamined,
       totalKeysExamined: data.totalKeysExamined,
-      indexUsed: data.indexUsed,
       compass_version: version
     })
   },
@@ -272,8 +270,7 @@ const RULES = [
     resource: 'Indexes',
     action: 'created',
     condition: () => true,
-    metadata: (version, state) => ({
-      ...state,
+    metadata: (version) => ({
       compass_version: version
     })
   },
@@ -347,8 +344,7 @@ const RULES = [
     resource: 'Aggregation',
     action: 'saved',
     condition: () => true,
-    metadata: (version, data) => ({
-      name: data.name,
+    metadata: (version) => ({
       compass_version: version
     })
   },
@@ -357,8 +353,7 @@ const RULES = [
     resource: 'Aggregation',
     action: 'deleted',
     condition: () => true,
-    metadata: (version, data) => ({
-      name: data.name,
+    metadata: (version) => ({
       compass_version: version
     })
   },
@@ -415,8 +410,7 @@ const RULES = [
     resource: 'ExportToLanguage',
     action: 'opened',
     condition: () => true,
-    metadata: (version, state) => ({
-      source: state.source,
+    metadata: (version) => ({
       compass_version: version
     })
   },
@@ -425,8 +419,7 @@ const RULES = [
     resource: 'ExportToLanguage',
     action: 'run',
     condition: () => true,
-    metadata: (version, state) => ({
-      ...state,
+    metadata: (version) => ({
       compass_version: version
     })
   },
