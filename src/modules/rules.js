@@ -14,6 +14,10 @@ async function getCloudInfoFromDataService(dataService) {
   }
 }
 
+function isNotEmptyObject(obj) {
+  return !!(obj && Object.keys(obj).length > 0);
+}
+
 /**
  * This file defines rules for tracking metrics based
  * on store changes and registry events.
@@ -279,9 +283,9 @@ const RULES = [
     action: 'applied',
     condition: (state) => state.queryState === 'apply',
     metadata: (version, state) => ({
-      'filter': state.filter,
-      'project': state.project,
-      'sort': state.sort,
+      'filter': isNotEmptyObject(state.filter),
+      'project': isNotEmptyObject(state.project),
+      'sort': isNotEmptyObject(state.sort),
       'skip': state.skip,
       'limit': state.limit,
       compass_version: version
