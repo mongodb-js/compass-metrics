@@ -45,7 +45,7 @@ const setupMetrics = (appRegistry, productName, version) => {
               + '/%s/users/show?user_id=%s', INTERCOM_KEY, app.user.id)
           }
         },
-        enabled: app.preferences.trackErrors
+        enabled: false
       }
     });
 

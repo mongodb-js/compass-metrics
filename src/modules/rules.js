@@ -410,7 +410,8 @@ const RULES = [
     resource: 'ExportToLanguage',
     action: 'opened',
     condition: () => true,
-    metadata: (version) => ({
+    metadata: (version, state) => ({
+      source: state.source,
       compass_version: version
     })
   },
@@ -419,7 +420,11 @@ const RULES = [
     resource: 'ExportToLanguage',
     action: 'run',
     condition: () => true,
-    metadata: (version) => ({
+    metadata: (version, state) => ({
+      language: state.language,
+      showImports: state.showImports,
+      type: state.type,
+      driver: state.driver,
       compass_version: version
     })
   },
